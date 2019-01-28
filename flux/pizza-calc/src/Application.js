@@ -1,21 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Title from "./Title";
-import Input from "./Input";
-import Result from "./Result";
+import Title from './Title';
+import Input from './Input';
+import Result from './Result';
 
-import calculatePizzasNeeded from "./lib/calculate-pizzas-needed";
+import calculatePizzasNeeded from './lib/calculate-pizzas-needed';
 
 const initialState = {
   numberOfPeople: 10,
-  slicesPerPerson: 2
+  slicesPerPerson: 2,
 };
 
-const WithCalculator = WrappedComponent => {
-  return WrappedComponent;
-};
-
-export default class ApplicationContainer extends Component {
+export default class Application extends Component {
   state = { ...initialState };
 
   updateNumberOfPeople = event => {
@@ -36,30 +32,9 @@ export default class ApplicationContainer extends Component {
     const { numberOfPeople, slicesPerPerson } = this.state;
     const numberOfPizzas = calculatePizzasNeeded(
       numberOfPeople,
-      slicesPerPerson
-    );
-
-    return (
-      <Application
-        numberOfPeople={numberOfPeople}
-        slicesPerPerson={slicesPerPerson}
-        numberOfPizzas={numberOfPizzas}
-        updateNumberOfPeople={this.updateNumberOfPeople}
-        updateSlicesPerPerson={this.updateSlicesPerPerson}
-      />
-    );
-  }
-}
-
-class Application extends Component {
-  render() {
-    const {
-      numberOfPeople,
       slicesPerPerson,
-      numberOfPizzas,
-      updateNumberOfPeople,
-      updateSlicesPerPerson
-    } = this.props;
+    );
+
     return (
       <div className="Application">
         <Title />
@@ -68,14 +43,14 @@ class Application extends Component {
           type="number"
           min={0}
           value={numberOfPeople}
-          onChange={updateNumberOfPeople}
+          onChange={this.updateNumberOfPeople}
         />
         <Input
           label="Slices Per Person"
           type="number"
           min={0}
           value={slicesPerPerson}
-          onChange={updateSlicesPerPerson}
+          onChange={this.updateSlicesPerPerson}
         />
         <Result amount={numberOfPizzas} />
         <button className="full-width" onClick={this.reset}>
