@@ -13,7 +13,7 @@ const initialState = {
 
 const WithPizzaCalculations = WrappedComponent => {
   return class extends Component {
-    static displayName = `WithCalculator(${WrappedComponent.displayName ||
+    static displayName = `WithPizzaCalculations(${WrappedComponent.displayName ||
       WrappedComponent.name})`;
 
     state = { ...initialState };
